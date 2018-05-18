@@ -20,6 +20,13 @@ label {
   margin-left: 1em;
 }
 
+/* Added a asterix next to each of the labels
+    thereby giving a visual clue to users that 
+    the field requires an entry*/
+label::after {
+  content: "*"
+}
+
 label:first-of-type {
   width: 90px;
   margin-left: 0;
@@ -41,4 +48,45 @@ input:focus {
 
 button {
   margin-left: .5em;
+}
+
+.search-result {
+  background-color: #D7CEC7;
+  width: 100vw;
+  height: 90vh;
+  position: relative;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: white
+}
+
+.result {
+  background-color: #565656;
+  margin: auto;
+  width: 70vw;
+  height: 75vh;
+  margin-top: 15px;
+  position: absolute;
+  top: 5vh;
+  left: 15vw;
+}
+
+/* .results {
+  justify-content: center;
+  align-items: center
+} */
+
+.election {
+  color: red;
+}
+
+a:link {
+  color: purple
+}
+
+a:hover, a:active {
+  color: red
+}
+
+u {
+  margin-right: 0.5em
 }

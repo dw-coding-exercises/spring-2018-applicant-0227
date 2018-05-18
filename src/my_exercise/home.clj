@@ -1,7 +1,8 @@
 (ns my-exercise.home
   (:require [hiccup.page :refer [html5]]
             [ring.util.anti-forgery :refer [anti-forgery-field]]
-            [my-exercise.us-state :as us-state]))
+            [my-exercise.us-state :as us-state]
+            [my-exercise.api :as api]))
 
 (defn header [_]
   [:head
@@ -96,6 +97,8 @@
    (ocd-id-explainer request)
    (current-elections-link request)])
 
+;Added required tags to all of the input & select tags in the form to leverage HTML's in-built remainder
+;Default values added for testing purpose; default address is Doug Jones' office in Birmingham, AL
 (defn address-form [_]
   [:div {:class "address-form"}
    [:h1 "Find my next election"]
@@ -106,28 +109,37 @@
      [:label {:for "street-field"} "Street:"]
      [:input {:id "street-field"
               :type "text"
-              :name "street"}]]
+              :name "street"
+              :required true
+              :value "Vance Federal Building"}]]
     [:div
-     [:label {:for "street-2-field"} "Street 2:"]
+     [:label {:for "street-2-field" :class "street-opt"} "Street 2:"]
      [:input {:id "street-2-field"
               :type "text"
-              :name "street-2"}]]
+              :name "street-2"
+              :required true
+              :value "1800 5th Avenue North"}]]
     [:div
      [:label {:for "city-field"} "City:"]
      [:input {:id "city-field"
               :type "text"
-              :name "city"}]
+              :name "city"
+              :required true
+              :value "Birmingham"}]
      [:label {:for "state-field"} "State:"]
      [:select {:id "state-field"
-               :name "state"}
+               :name "state"
+               :required true}
       [:option ""]
       (for [state us-state/postal-abbreviations]
-        [:option {:value state} state])]
+        [:option {:value state :selected (= state "AL")} state])]
      [:label {:for "zip-field"} "ZIP:"]
      [:input {:id "zip-field"
               :type "text"
               :name "zip"
-              :size "10"}]]
+              :size "10"
+              :required true
+              :value "35203"}]]
     [:div.button
      [:button {:type "submit"} "Search"]]]])
 
